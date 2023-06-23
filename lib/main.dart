@@ -2,6 +2,7 @@ import 'package:english_words/english_words.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jack_social_app/firebase_options.dart';
+import 'package:jack_social_app/form_widgets.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -147,6 +148,17 @@ class GeneratorPage extends StatelessWidget {
                   appState.getNext();
                 },
                 child: Text('Next'),
+              ),
+              SizedBox(width: 10),
+              ElevatedButton(
+    // Within the `FirstRoute` widget
+                onPressed: () {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FormWidgetsDemo()),
+                );
+                },
+                child: Text('Form App'),
               ),
             ],
           ),
