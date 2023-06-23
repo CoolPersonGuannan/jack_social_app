@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "881122469323",
+    "firebase_url": "https://chat-app-91a9d-default-rtdb.firebaseio.com",
+    "project_id": "chat-app-91a9d",
+    "storage_bucket": "chat-app-91a9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881122469323:android:c22a1c1c5eaab87ec6024e",
+        "android_client_info": {
+          "package_name": "com.gavinsoftware.gavin_chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881122469323-4vgifp6vhnm4hhpsq917j7jpcuo34pfm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gavinsoftware.gavin_chat_app",
+            "certificate_hash": "95854941b3d1fe8aaeed8749a85caeb8d0b23570"
+          }
+        },
+        {
+          "client_id": "881122469323-gc5cgr5ak7aj5ir8nbgpqorr0ai494me.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gavinsoftware.gavin_chat_app",
+            "certificate_hash": "fcefcadfea0db765059aaae2fa5470fcab4c883b"
+          }
+        },
+        {
+          "client_id": "881122469323-mgopcnk5uh6rrmb7fkpc5mrnl37n4a01.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gavinsoftware.gavin_chat_app",
+            "certificate_hash": "bf6a81b69cbd489f49dff88cf78ffdf8ecb5199e"
+          }
+        },
+        {
+          "client_id": "881122469323-63rj42v1ra9egnguaeken7f68v0n7mn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaJmPtsAPo9KROns6q2uhwzDCX6_xHY4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881122469323-1e006f20bics5r6bv33flt15tg52a893.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "881122469323-n2np8lq2i3hugb88541lqg7h3c38oitk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gavinsoftware.gavinChatApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881122469323:android:4da78c774088a99fc6024e",
+        "android_client_info": {
+          "package_name": "com.jacksoftware.jack_social_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881122469323-63rj42v1ra9egnguaeken7f68v0n7mn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaJmPtsAPo9KROns6q2uhwzDCX6_xHY4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881122469323-1e006f20bics5r6bv33flt15tg52a893.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "881122469323-n2np8lq2i3hugb88541lqg7h3c38oitk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gavinsoftware.gavinChatApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
