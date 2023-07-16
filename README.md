@@ -1,4 +1,4 @@
-# jack_social_app
+# jack_social_app_v2
 
 A new Flutter project.
 

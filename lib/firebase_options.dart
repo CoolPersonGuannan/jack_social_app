@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,9 +46,20 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCc9dZ0gKy118IC6UTUU4vyBzd807Qlv8A',
+    appId: '1:881122469323:web:b3ead63c419aa9f7c6024e',
+    messagingSenderId: '881122469323',
+    projectId: 'chat-app-91a9d',
+    authDomain: 'chat-app-91a9d.firebaseapp.com',
+    databaseURL: 'https://chat-app-91a9d-default-rtdb.firebaseio.com',
+    storageBucket: 'chat-app-91a9d.appspot.com',
+    measurementId: 'G-0X3VYZ2877',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCaJmPtsAPo9KROns6q2uhwzDCX6_xHY4U',
-    appId: '1:881122469323:android:4da78c774088a99fc6024e',
+    appId: '1:881122469323:android:a97ae1b7d6d7db86c6024e',
     messagingSenderId: '881122469323',
     projectId: 'chat-app-91a9d',
     databaseURL: 'https://chat-app-91a9d-default-rtdb.firebaseio.com',
@@ -60,13 +68,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBKLW7guOzj3tDZUWzH6BwqatExC6WOlMo',
-    appId: '1:881122469323:ios:c925511e1053170ac6024e',
+    appId: '1:881122469323:ios:c7c4a0530ed6f718c6024e',
     messagingSenderId: '881122469323',
     projectId: 'chat-app-91a9d',
     databaseURL: 'https://chat-app-91a9d-default-rtdb.firebaseio.com',
     storageBucket: 'chat-app-91a9d.appspot.com',
     androidClientId: '881122469323-4vgifp6vhnm4hhpsq917j7jpcuo34pfm.apps.googleusercontent.com',
-    iosClientId: '881122469323-g735csnjebgl9bq4per5l2id8se3127j.apps.googleusercontent.com',
-    iosBundleId: 'com.jacksoftware.jackSocialApp',
+    iosClientId: '881122469323-r1gv337jomt02h0jj8nbjitmmhfbnjbc.apps.googleusercontent.com',
+    iosBundleId: 'com.codingminds.jacksocialapp.jackSocialAppV2',
   );
 }

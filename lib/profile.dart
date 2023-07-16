@@ -1,13 +1,10 @@
-// Copyright 2022, the Chromium project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:jack_social_app/main.dart';
+import 'package:jack_social_app_v2/main.dart';
+// import 'package:jack_social_app/testrealtimedatabase.dart';
 
 import 'auth.dart';
 
@@ -197,48 +194,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      TextButton(
-                        onPressed: () async {
-                          final session = await user.multiFactor.getSession();
-                          await auth.verifyPhoneNumber(
-                            multiFactorSession: session,
-                            phoneNumber: phoneController.text,
-                            verificationCompleted: (_) {},
-                            verificationFailed: print,
-                            codeSent: (
-                              String verificationId,
-                              int? resendToken,
-                            ) async {
-                              final smsCode = await getSmsCodeFromUser(context);
-
-                              if (smsCode != null) {
-                                // Create a PhoneAuthCredential with the code
-                                final credential = PhoneAuthProvider.credential(
-                                  verificationId: verificationId,
-                                  smsCode: smsCode,
-                                );
-
-                                try {
-                                  await user.multiFactor.enroll(
-                                    PhoneMultiFactorGenerator.getAssertion(
-                                      credential,
-                                    ),
-                                  );
-                                } on FirebaseAuthException catch (e) {
-                                  print(e.message);
-                                }
-                              }
-                            },
-                            codeAutoRetrievalTimeout: print,
-                          );
-                        },
-                        child: const Text('Verify Number For MFA'),
-                      ),
+                      // TextButton(
+                      //   onPressed: () async {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => RealTimeFirebasePage()),
+                      //     );
+                      //   },
+                      //   child: const Text('Verify Number For MFA'),
+                      // ),
                       TextButton(
                         onPressed: () async {
                           try {
                             final enrolledFactors =
-                                await user.multiFactor.getEnrolledFactors();
+                            await user.multiFactor.getEnrolledFactors();
 
                             await user.multiFactor.unenroll(
                               factorUid: enrolledFactors.first.uid,
@@ -270,9 +240,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: !showSaveButton
                     ? SizedBox(key: UniqueKey())
                     : TextButton(
-                        onPressed: isLoading ? null : updateDisplayName,
-                        child: const Text('Save changes'),
-                      ),
+                  onPressed: isLoading ? null : updateDisplayName,
+                  child: const Text('Save changes'),
+                ),
               ),
             )
           ],
