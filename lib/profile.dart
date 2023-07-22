@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jack_social_app_v2/form_widget.dart';
 import 'package:jack_social_app_v2/main.dart';
+import 'package:jack_social_app_v2/realtimedatabase.dart';
 // import 'package:jack_social_app/testrealtimedatabase.dart';
 
 import 'auth.dart';
@@ -194,16 +196,26 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      // TextButton(
-                      //   onPressed: () async {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => RealTimeFirebasePage()),
-                      //     );
-                      //   },
-                      //   child: const Text('Verify Number For MFA'),
-                      // ),
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RealTimeFirebase()),
+                          );
+                        },
+                        child: const Text('Test Firebase'),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FormWidgetsDemo()),
+                          );
+                        },
+                        child: const Text('Forms Page'),
+                      ),
                       TextButton(
                         onPressed: () async {
                           try {
