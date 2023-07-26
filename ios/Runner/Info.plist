@@ -10,6 +10,12 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>The app uses Photo Library in order to get a visual account of what happened to you today</string>
+    <key>NSCameraUsageDescription</key>
+    <string>The app uses Photo Camera in order to get a visual account of what happened to you today</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>The app uses Video Recordings in order to get a visual account of what happened to you today</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

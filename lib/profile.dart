@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jack_social_app_v2/form_widget.dart';
+import 'package:jack_social_app_v2/image_picker_example.dart';
 import 'package:jack_social_app_v2/main.dart';
 import 'package:jack_social_app_v2/realtimedatabase.dart';
 // import 'package:jack_social_app/testrealtimedatabase.dart';
@@ -211,27 +213,20 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => FormWidgetsDemo()),
+                                builder: (context) => FormWidgetDemo()),
                           );
                         },
                         child: const Text('Forms Page'),
                       ),
                       TextButton(
-                        onPressed: () async {
-                          try {
-                            final enrolledFactors =
-                            await user.multiFactor.getEnrolledFactors();
-
-                            await user.multiFactor.unenroll(
-                              factorUid: enrolledFactors.first.uid,
-                            );
-                            // Show snackbar
-                            ScaffoldSnackbar.of(context).show('MFA unenrolled');
-                          } catch (e) {
-                            print(e);
-                          }
+                        onPressed: ()   {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ImageSuperPicker(title: "Our Dream Vacation",)),
+                          );
                         },
-                        child: const Text('Unenroll MFA'),
+                        child: const Text('Picker Example'),
                       ),
                       const Divider(),
                       TextButton(
@@ -252,9 +247,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: !showSaveButton
                     ? SizedBox(key: UniqueKey())
                     : TextButton(
-                  onPressed: isLoading ? null : updateDisplayName,
-                  child: const Text('Save changes'),
-                ),
+                        onPressed: isLoading ? null : updateDisplayName,
+                        child: const Text('Save changes'),
+                      ),
               ),
             )
           ],

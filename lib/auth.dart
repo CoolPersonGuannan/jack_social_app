@@ -52,8 +52,8 @@ extension on AuthMode {
   String get label => this == AuthMode.login
       ? 'Sign in'
       : this == AuthMode.phone
-      ? 'Sign in'
-      : 'Register';
+          ? 'Sign in'
+          : 'Register';
 }
 
 /// Entrypoint example for various sign-in flows with Firebase.
@@ -98,29 +98,14 @@ class _AuthGateState extends State<AuthGate> {
     if (!kIsWeb && Platform.isMacOS) {
       authButtons = {
         Buttons.Apple: () => _handleMultiFactorException(
-          _signInWithApple,
-        ),
+              _signInWithApple,
+            ),
       };
     } else {
       authButtons = {
-        Buttons.Apple: () => _handleMultiFactorException(
-          _signInWithApple,
-        ),
         Buttons.Google: () => _handleMultiFactorException(
-          _signInWithGoogle,
-        ),
-        Buttons.GitHub: () => _handleMultiFactorException(
-          _signInWithGitHub,
-        ),
-        Buttons.Microsoft: () => _handleMultiFactorException(
-          _signInWithMicrosoft,
-        ),
-        Buttons.Twitter: () => _handleMultiFactorException(
-          _signInWithTwitter,
-        ),
-        Buttons.Yahoo: () => _handleMultiFactorException(
-          _signInWithYahoo,
-        ),
+              _signInWithGoogle,
+            ),
       };
     }
   }
@@ -148,7 +133,7 @@ class _AuthGateState extends State<AuthGate> {
                             visible: error.isNotEmpty,
                             child: MaterialBanner(
                               backgroundColor:
-                              Theme.of(context).colorScheme.error,
+                                  Theme.of(context).colorScheme.error,
                               content: SelectableText(error),
                               actions: [
                                 TextButton(
@@ -164,7 +149,7 @@ class _AuthGateState extends State<AuthGate> {
                                 )
                               ],
                               contentTextStyle:
-                              const TextStyle(color: Colors.white),
+                                  const TextStyle(color: Colors.white),
                               padding: const EdgeInsets.all(10),
                             ),
                           ),
@@ -181,9 +166,9 @@ class _AuthGateState extends State<AuthGate> {
                                   keyboardType: TextInputType.emailAddress,
                                   autofillHints: const [AutofillHints.email],
                                   validator: (value) =>
-                                  value != null && value.isNotEmpty
-                                      ? null
-                                      : 'Required',
+                                      value != null && value.isNotEmpty
+                                          ? null
+                                          : 'Required',
                                 ),
                                 const SizedBox(height: 20),
                                 TextFormField(
@@ -194,9 +179,9 @@ class _AuthGateState extends State<AuthGate> {
                                     border: OutlineInputBorder(),
                                   ),
                                   validator: (value) =>
-                                  value != null && value.isNotEmpty
-                                      ? null
-                                      : 'Required',
+                                      value != null && value.isNotEmpty
+                                          ? null
+                                          : 'Required',
                                 ),
                               ],
                             ),
@@ -209,9 +194,9 @@ class _AuthGateState extends State<AuthGate> {
                                 border: OutlineInputBorder(),
                               ),
                               validator: (value) =>
-                              value != null && value.isNotEmpty
-                                  ? null
-                                  : 'Required',
+                                  value != null && value.isNotEmpty
+                                      ? null
+                                      : 'Required',
                             ),
                           const SizedBox(height: 20),
                           SizedBox(
@@ -221,8 +206,8 @@ class _AuthGateState extends State<AuthGate> {
                               onPressed: isLoading
                                   ? null
                                   : () => _handleMultiFactorException(
-                                _emailAndPassword,
-                              ),
+                                        _emailAndPassword,
+                                      ),
                               child: isLoading
                                   ? const CircularProgressIndicator.adaptive()
                                   : Text(mode.label),
@@ -235,27 +220,27 @@ class _AuthGateState extends State<AuthGate> {
                           ...authButtons.keys
                               .map(
                                 (button) => Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 5),
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 200),
-                                child: isLoading
-                                    ? Container(
-                                  color: Colors.grey[200],
-                                  height: 50,
-                                  width: double.infinity,
-                                )
-                                    : SizedBox(
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: SignInButton(
-                                    button,
-                                    onPressed: authButtons[button]!,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: AnimatedSwitcher(
+                                    duration: const Duration(milliseconds: 200),
+                                    child: isLoading
+                                        ? Container(
+                                            color: Colors.grey[200],
+                                            height: 50,
+                                            width: double.infinity,
+                                          )
+                                        : SizedBox(
+                                            width: double.infinity,
+                                            height: 50,
+                                            child: SignInButton(
+                                              button,
+                                              onPressed: authButtons[button]!,
+                                            ),
+                                          ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          )
+                              )
                               .toList(),
                           SizedBox(
                             width: double.infinity,
@@ -264,23 +249,23 @@ class _AuthGateState extends State<AuthGate> {
                               onPressed: isLoading
                                   ? null
                                   : () {
-                                if (mode != AuthMode.phone) {
-                                  setState(() {
-                                    mode = AuthMode.phone;
-                                  });
-                                } else {
-                                  setState(() {
-                                    mode = AuthMode.login;
-                                  });
-                                }
-                              },
+                                      if (mode != AuthMode.phone) {
+                                        setState(() {
+                                          mode = AuthMode.phone;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          mode = AuthMode.login;
+                                        });
+                                      }
+                                    },
                               child: isLoading
                                   ? const CircularProgressIndicator.adaptive()
                                   : Text(
-                                mode != AuthMode.phone
-                                    ? 'Sign in with Phone Number'
-                                    : 'Sign in with Email and Password',
-                              ),
+                                      mode != AuthMode.phone
+                                          ? 'Sign in with Phone Number'
+                                          : 'Sign in with Email and Password',
+                                    ),
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -399,8 +384,8 @@ class _AuthGateState extends State<AuthGate> {
   }
 
   Future<void> _handleMultiFactorException(
-      Future<void> Function() authFunction,
-      ) async {
+    Future<void> Function() authFunction,
+  ) async {
     setIsLoading();
     try {
       await authFunction();
@@ -478,7 +463,7 @@ class _AuthGateState extends State<AuthGate> {
     } else {
       if (kIsWeb) {
         final confirmationResult =
-        await auth.signInWithPhoneNumber(phoneController.text);
+            await auth.signInWithPhoneNumber(phoneController.text);
         final smsCode = await getSmsCodeFromUser(context);
 
         if (smsCode != null) {
