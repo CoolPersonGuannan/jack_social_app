@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jack_social_app_v2/profile.dart';
+import 'package:jack_social_app_v2/home_page.dart';
 
 import 'auth.dart';
 import 'firebase_options.dart';
@@ -13,14 +13,8 @@ bool shouldUseFirebaseEmulator = false;
 late final FirebaseApp app;
 late final FirebaseAuth auth;
 
-// Requires that the Firebase Auth emulator is running locally
-// e.g via `melos run firebase:emulator`.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // We're using the manual installation on non-web platforms since Google sign in plugin doesn't yet support Dart initialization.
-  // See related issue: https://github.com/flutter/flutter/issues/96391
-
-  // We store the app and auth to make testing with a named instance easier.
   app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -33,15 +27,13 @@ Future<void> main() async {
   runApp(const AuthExampleApp());
 }
 
-/// The entry point of the application.
-///
-/// Returns a [MaterialApp].
 class AuthExampleApp extends StatelessWidget {
   const AuthExampleApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Firebase Example App',
       theme: ThemeData(primarySwatch: Colors.amber),
       home: Scaffold(
@@ -77,7 +69,7 @@ class AuthExampleApp extends StatelessWidget {
                     stream: auth.authStateChanges(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return const ProfilePage();
+                        return const BottomNavigationBarControl();
                       }
                       return const AuthGate();
                     },

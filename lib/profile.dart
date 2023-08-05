@@ -51,8 +51,6 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     });
 
-    log(user.toString());
-
     super.initState();
   }
 
@@ -176,27 +174,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      TextButton(
-                        onPressed: () {
-                          user.sendEmailVerification();
-                        },
-                        child: const Text('Verify Email'),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          final a = await user.multiFactor.getEnrolledFactors();
-                          print(a);
-                        },
-                        child: const Text('Get enrolled factors'),
-                      ),
-                      TextFormField(
-                        controller: phoneController,
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.phone),
-                          hintText: '+33612345678',
-                          labelText: 'Phone number',
-                        ),
-                      ),
                       const SizedBox(height: 20),
                       TextButton(
                         onPressed: () async {
@@ -213,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => FormWidgetDemo()),
+                                builder: (context) => FormWidgetsDemo()),
                           );
                         },
                         child: const Text('Forms Page'),

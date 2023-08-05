@@ -16,6 +16,10 @@
     <string>The app uses Photo Camera in order to get a visual account of what happened to you today</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>The app uses Video Recordings in order to get a visual account of what happened to you today</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open in order to personalize your volunteer-finding experience.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location when in the background in order to personalize your volunteer-finding experience.</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
