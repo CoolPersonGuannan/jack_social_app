@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jack_social_app_v2/chat_page.dart';
 import 'package:jack_social_app_v2/form_widget.dart';
+import 'package:jack_social_app_v2/image_picker_example.dart';
 import 'package:jack_social_app_v2/location_page.dart';
 import 'package:jack_social_app_v2/profile.dart';
 import 'package:jack_social_app_v2/realtimedatabase.dart';
@@ -15,10 +17,12 @@ class BottomNavigationBarControl extends StatefulWidget {
 class _BottomNavigationBarControlState
     extends State<BottomNavigationBarControl> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    GeolocatorWidget(),
-    RealTimeFirebase(),
-    ProfilePage(),
+  //String character;
+  static final List<Widget> _widgetOptions = <Widget>[
+    const ChatPage(character: "You are a teenager in a high school and you are also participate in multiple school clubs and sport teams. You are also focusing on grades and academics. "),
+    ImageSuperPicker(),
+    const RealTimeFirebase(),
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,21 +37,15 @@ class _BottomNavigationBarControlState
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'BigDefaultFormButton',
-        onPressed: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const FormWidgetsDemo()),
-          );
-        },
-        child: Icon(Icons.add),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Activities',
+          ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.image),
+            label: 'Images',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_business_outlined),
