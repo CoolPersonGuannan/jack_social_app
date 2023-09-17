@@ -35,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
 
     // Initialize ChatGPT SDK
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: "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",
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),
@@ -51,6 +51,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
   }
 
+
   Future<String> getInfo() async {
     // getUserInfo().then((info) {
     //   print(info);
@@ -65,23 +66,20 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Future<void> _handleInitialMessage(String character) async {
-    setState(() {
-      _isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+      });
+    }
 
     print(widget.character.toLowerCase());
     final request = ChatCompleteText(
       messages: [
-        //Map.of({"role": "assistant", "content": character}),
         Messages(
             role: Role.assistant,
             content: "You are a ${widget.character.toLowerCase()}. ",
             //name: "analysis app",
         )
-        // Map.of({
-        //   "role": "assistant",
-        //   "content": 'You are a ${widget.character.toLowerCase()}. '
-        // })
       ],
       maxToken: 200,
       model: GptTurbo0631Model(),
@@ -95,16 +93,20 @@ class _ChatPageState extends State<ChatPage> {
       timestamp: DateTime.now(),
     );
 
-    setState(() {
-      _messages.insert(0, message);
-      _isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        _messages.insert(0, message);
+        _isLoading = false;
+      });
+    }
   }
 
   Future<void> _handleSubmit(String text) async {
-    setState(() {
-      _isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+      });
+    }
     _textController.clear();
 
     // Add the user sent message to the thread
@@ -114,9 +116,11 @@ class _ChatPageState extends State<ChatPage> {
       timestamp: DateTime.now(),
     );
 
-    setState(() {
-      _messages.insert(0, prompt);
-    });
+    if (mounted) {
+      setState(() {
+        _messages.insert(0, prompt);
+      });
+    }
 
     // Handle ChatGPT request and response
     final request = ChatCompleteText(
@@ -146,10 +150,12 @@ class _ChatPageState extends State<ChatPage> {
       timestamp: DateTime.now(),
     );
 
-    setState(() {
-      _messages.insert(0, message);
-      _isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        _messages.insert(0, message);
+        _isLoading = false;
+      });
+    }
   }
 
   Widget _buildChatList() {

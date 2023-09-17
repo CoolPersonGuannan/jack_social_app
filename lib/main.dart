@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jack_social_app_v2/home_page.dart';
 
-import 'auth.dart';
-import 'firebase_options.dart';
+import 'auth/auth.dart';
+import 'auth/firebase_options.dart';
 
 /// Requires that a Firebase local emulator is running locally.
 /// See https://firebase.flutter.dev/docs/auth/start/#optional-prototype-and-test-with-firebase-local-emulator-suite

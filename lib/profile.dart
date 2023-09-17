@@ -1,22 +1,22 @@
 import 'dart:developer';
 
+import 'package:animated_background/animated_background.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:jack_social_app_v2/chat_page.dart';
 import 'package:jack_social_app_v2/form_widget.dart';
 import 'package:jack_social_app_v2/image_picker_example.dart';
 import 'package:jack_social_app_v2/main.dart';
-import 'package:jack_social_app_v2/realtimedatabase.dart';
-// import 'package:jack_social_app/testrealtimedatabase.dart';
+import 'package:jack_social_app_v2/your_journals.dart';
 
-import 'auth.dart';
+import 'auth/auth.dart';
 
 /// Displayed as a profile image if the user doesn't have one.
 const placeholderImage =
     'https://upload.wikimedia.org/wikipedia/commons/c/cd/Portrait_Placeholder_Square.png';
 
-/// Profile page shows after sign in or registerationg
+/// Profile page shows after sign in or registeration
 class ProfilePage extends StatefulWidget {
   // ignore: public_member_api_docs
   const ProfilePage({Key? key}) : super(key: key);
@@ -26,10 +26,9 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin{
   late User user;
   late TextEditingController controller;
-  final phoneController = TextEditingController();
 
   String? photoURL;
 
@@ -93,143 +92,220 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    ParticleOptions particles = const ParticleOptions(
+      baseColor: Colors.cyan,
+      spawnOpacity: 0.0,
+      opacityChangeRate: 0.25,
+      minOpacity: 0.1,
+      maxOpacity: 0.4,
+      particleCount: 70,
+      spawnMaxRadius: 15.0,
+      spawnMaxSpeed: 100.0,
+      spawnMinSpeed: 30,
+      spawnMinRadius: 7.0,
+    );
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        body: Stack(
-          children: [
-            Center(
-              child: SizedBox(
-                width: 400,
+        body: AnimatedBackground(
+          vsync: this,
+          behaviour: RandomParticleBehaviour(options: particles),
+          child: Stack(
+            children: [
+              SizedBox(
+                // width: 400,
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Stack(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: 60,
-                            backgroundImage: NetworkImage(
-                              user.photoURL ?? placeholderImage,
-                            ),
-                          ),
-                          Positioned.directional(
-                            textDirection: Directionality.of(context),
-                            end: 0,
-                            bottom: 0,
-                            child: Material(
-                              clipBehavior: Clip.antiAlias,
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(40),
-                              child: InkWell(
-                                onTap: () async {
-                                  final photoURL = await getPhotoURLFromUser();
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                        child: Column(
+                          children: [
+                            Stack(
+                              children: [
+                                CircleAvatar(
+                                  maxRadius: 100,
+                                  backgroundImage: NetworkImage(
+                                    user.photoURL ?? placeholderImage,
+                                  ),
+                                ),
+                                Positioned.directional(
+                                  textDirection: Directionality.of(context),
+                                  end: 0,
+                                  bottom: 0,
+                                  child: Material(
+                                    clipBehavior: Clip.antiAlias,
+                                    color: Theme.of(context).colorScheme.secondary,
+                                    borderRadius: BorderRadius.circular(40),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        final photoURL = await getPhotoURLFromUser();
 
-                                  if (photoURL != null) {
-                                    await user.updatePhotoURL(photoURL);
-                                  }
-                                },
-                                radius: 50,
-                                child: const SizedBox(
-                                  width: 35,
-                                  height: 35,
-                                  child: Icon(Icons.edit),
+                                        if (photoURL != null) {
+                                          await user.updatePhotoURL(photoURL);
+                                        }
+                                      },
+                                      radius: 50,
+                                      child: const SizedBox(
+                                        width: 35,
+                                        height: 35,
+                                        child: Icon(Icons.edit),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            TextField(
+                              style: const TextStyle(
+                                fontSize: 30,
+                              ),
+                              textAlign: TextAlign.center,
+                              controller: controller,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                floatingLabelBehavior: FloatingLabelBehavior.never,
+                                alignLabelWithHint: true,
+                                label: Center(
+                                  child: Text(
+                                    'Click to add a display name',
+                                  ),
                                 ),
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      TextField(
-                        textAlign: TextAlign.center,
-                        controller: controller,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          alignLabelWithHint: true,
-                          label: Center(
-                            child: Text(
-                              'Click to add a display name',
+                            Text(
+                                user.email ?? user.phoneNumber ?? 'User',
                             ),
-                          ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                if (userProviders.contains('phone'))
+                                  const Icon(Icons.phone),
+                                if (userProviders.contains('password'))
+                                  const Icon(Icons.mail),
+                                if (userProviders.contains('google.com'))
+                                  SizedBox(
+                                    width: 24,
+                                    child: Image.network(
+                                      'https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png',
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                      Text(user.email ?? user.phoneNumber ?? 'User'),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (userProviders.contains('phone'))
-                            const Icon(Icons.phone),
-                          if (userProviders.contains('password'))
-                            const Icon(Icons.mail),
-                          if (userProviders.contains('google.com'))
-                            SizedBox(
-                              width: 24,
-                              child: Image.network(
-                                'https://upload.wikimedia.org/wikipedia/commons/0/09/IOS_Google_icon.png',
-                              ),
-                            ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      const SizedBox(height: 20),
-                      TextButton(
-                        onPressed: () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RealTimeFirebase()),
-                          );
-                        },
-                        child: const Text('Test Firebase'),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FormWidgetsDemo()),
-                          );
-                        },
-                        child: const Text('Forms Page'),
-                      ),
-                      TextButton(
-                        onPressed: ()   {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ImageSuperPicker(title: "Our Dream Vacation",)),
-                          );
-                        },
-                        child: const Text('Picker Example'),
-                      ),
-                      const Divider(),
-                      TextButton(
-                        onPressed: _signOut,
-                        child: const Text('Sign out'),
-                      ),
+                      // const SizedBox(height: 20),
+                      // const SizedBox(height: 20),
+                      // TextButton(
+                      //   onPressed: () async {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => RealTimeFirebase()),
+                      //     );
+                      //   },
+                      //   child: const Text('Test Firebase'),
+                      // ),
+                      // TextButton(
+                      //   onPressed: () async {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => FormWidgetsDemo()),
+                      //     );
+                      //   },
+                      //   child: const Text('Forms Page'),
+                      // ),
+                      // TextButton(
+                      //   onPressed: ()   {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => const ChatPage(character: "You are a teenager in a high school and you are also participate in multiple school clubs and sport teams. You are also focusing on grades and academics. "),),
+                      //     );
+                      //   },
+                      //   child: const Text('Chat Page'),
+                      // ),
+                      // const Divider(),
+                      // TextButton(
+                      //   onPressed: _signOut,
+                      //   child: const Text('Sign out'),
+                      // ),
+                      // GridView.count(
+                      //   physics: const BouncingScrollPhysics(),
+                      //   shrinkWrap: true,
+                      //   primary: false,
+                      //   padding: const EdgeInsets.all(20),
+                      //   crossAxisSpacing: 10,
+                      //   mainAxisSpacing: 10,
+                      //   crossAxisCount: 2,
+                      //   children: <Widget>[
+                      //     Container(
+                      //       padding: const EdgeInsets.all(8),
+                      //       color: Colors.teal[100],
+                      //       child: const Text("He'd have you all unravel at the"),
+                      //     ),
+                      //     Container(
+                      //       padding: const EdgeInsets.all(8),
+                      //       color: Colors.teal[200],
+                      //       child: const Text('Heed not the rabble'),
+                      //     ),
+                      //     Container(
+                      //       padding: const EdgeInsets.all(8),
+                      //       color: Colors.teal[300],
+                      //       child: const Text('Sound of screams but the'),
+                      //     ),
+                      //     Container(
+                      //       padding: const EdgeInsets.all(8),
+                      //       color: Colors.teal[400],
+                      //       child: const Text('Who scream'),
+                      //     ),
+                      //     Container(
+                      //       padding: const EdgeInsets.all(8),
+                      //       color: Colors.teal[500],
+                      //       child: const Text('Revolution is coming...'),
+                      //     ),
+                      //     Container(
+                      //       padding: const EdgeInsets.all(8),
+                      //       color: Colors.teal[600],
+                      //       child: const Text('Revolution, they...'),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
               ),
-            ),
-            Positioned.directional(
-              textDirection: Directionality.of(context),
-              end: 40,
-              top: 40,
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: !showSaveButton
-                    ? SizedBox(key: UniqueKey())
-                    : TextButton(
-                        onPressed: isLoading ? null : updateDisplayName,
-                        child: const Text('Save changes'),
-                      ),
-              ),
-            )
-          ],
+              Positioned.directional(
+                textDirection: Directionality.of(context),
+                end: 40,
+                top: 40,
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: !showSaveButton
+                      ? SizedBox(key: UniqueKey())
+                      : TextButton(
+                          onPressed: isLoading ? null : updateDisplayName,
+                          child: const Text('Save changes'),
+                        ),
+                ),
+              )
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FormPage()),
+              );
+            },
+            label: const Text("Let's write about your day"),
         ),
       ),
     );
