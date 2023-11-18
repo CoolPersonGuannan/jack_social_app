@@ -6,8 +6,10 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart' show  kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:jack_social_app_v2/form_widget.dart';
 import 'package:jack_social_app_v2/main.dart';
+import 'package:jack_social_app_v2/specific_journal.dart';
 
 class YourJournals extends StatefulWidget {
   const YourJournals({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class _YourJournalsState extends State<YourJournals> {
 
     _messagesSubscription = messagesQuery.onChildAdded.listen(
           (DatabaseEvent event) {
-        print('Child added: ${event.snapshot.value}');
+        //print('Child added: ${event.snapshot.value}');
       },
       onError: (Object o) {
         final error = o as FirebaseException;
@@ -115,17 +117,26 @@ class _YourJournalsState extends State<YourJournals> {
               reverse: _anchorToBottom,
               itemBuilder: (context, snapshot, animation, index) {
                 final diaryList = snapshot.value! as Map;
+                int timeSkip = diaryList["date"] ;
+                final DateTime timeStamp = DateTime.fromMillisecondsSinceEpoch(timeSkip);
+                String formattedDate = DateFormat('MM-dd-yyyy').format(timeStamp);
                 return SizeTransition(
                   sizeFactor: animation,
                   child: Card(
-                    child: ListTile(
-                      leading: Image.network(diaryList["picURL"]),
-                      trailing: IconButton(
-                        onPressed: () => _deleteMessage(snapshot),
-                        icon: const Icon(Icons.delete),
+                    child: GestureDetector(
+                      onTap: () {
+                        context;
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => DayDetailScreen(info: diaryList, date: formattedDate)));
+                      },
+                      child: ListTile(
+                        leading: Image.network(diaryList["picURL"]),
+                        trailing: IconButton(
+                          onPressed: () => _deleteMessage(snapshot),
+                          icon: const Icon(Icons.delete),
+                        ),
+                        title: Text(diaryList["title_for_today"]),
+                        subtitle: Text(diaryList["mood_of_the_day"]),
                       ),
-                      title: Text(diaryList["title_for_today"]),
-                      subtitle: Text(diaryList["mood_of_the_day"]),
                     ),
                   ),
                 );
@@ -133,17 +144,6 @@ class _YourJournalsState extends State<YourJournals> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const FormPage()),
-          );
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

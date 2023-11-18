@@ -1,13 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jack_social_app_v2/home_page.dart';
+import 'package:jack_social_app_v2/admins/home_page.dart';
+import 'package:jack_social_app_v2/users/home_page.dart';
 
 import 'auth/auth.dart';
 import 'auth/firebase_options.dart';
 
-/// Requires that a Firebase local emulator is running locally.
-/// See https://firebase.flutter.dev/docs/auth/start/#optional-prototype-and-test-with-firebase-local-emulator-suite
 bool shouldUseFirebaseEmulator = false;
 
 late final FirebaseApp app;
@@ -34,7 +34,15 @@ class AuthExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Firebase Example App',
+      title: 'Jack Social App',
+      //initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        //'/': (context) => const AuthGate(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/Admins': (context) => const AdminHomePage(),
+        '/Users': (context) => const BottomNavigationBarControl(),
+      },
       theme: ThemeData(primarySwatch: Colors.amber),
       home: Scaffold(
         body: LayoutBuilder(
@@ -65,11 +73,32 @@ class AuthExampleApp extends StatelessWidget {
                   width: constraints.maxWidth >= 1200
                       ? constraints.maxWidth / 2
                       : constraints.maxWidth,
-                  child: StreamBuilder<User?>(
+                  child: StreamBuilder(
                     stream: auth.authStateChanges(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return const BottomNavigationBarControl();
+                           FirebaseFirestore.instance.collection('JackSocialApp')
+                              .doc("All Users")
+                              .collection("Users")
+                              .doc(snapshot.data!.uid)
+                              .get()
+                              .then((value) {
+                            var userType = value.data()!["role"];
+                            if (userType == "Users") {
+                              print("testPushUsersMain");
+                              Navigator.pushReplacementNamed(
+                                  context,
+                                  "/Users"
+                              );
+                            }
+                            if (userType == "Admins") {
+                              print("testPushAdminsMain");
+                              Navigator.pushReplacementNamed(
+                                  context,
+                                  "/Admins"
+                              );
+                            }
+                          });
                       }
                       return const AuthGate();
                     },

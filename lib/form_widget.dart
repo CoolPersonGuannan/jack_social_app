@@ -339,7 +339,7 @@ class _FormPageState extends State<FormPage> {
                     .catchError((error) => print("You got error on $error"));
                 updateYourDay();
                 if (context.mounted) {
-                  Navigator.of(context).popUntil((route) => route.isCurrent);
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                 }
               },
               child: const Text("Update your Diary Now!"),

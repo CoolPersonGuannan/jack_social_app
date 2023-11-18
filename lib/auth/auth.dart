@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -65,6 +66,16 @@ class _AuthGateState extends State<AuthGate> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController roleController = TextEditingController();
+
+  // Initial Selected Value
+  String dropdownvalue = 'Users';
+
+  // List of items in our dropdown menu
+  var items = [
+    'Users',
+    'Admins',
+  ];
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String error = '';
@@ -179,6 +190,24 @@ class _AuthGateState extends State<AuthGate> {
                                           ? null
                                           : 'Required',
                                 ),
+                                Visibility(
+                                    visible: mode == AuthMode.login  ? false : true,
+                                    child: DropdownButton(
+                                      value: dropdownvalue,
+                                      icon: const Icon(Icons.keyboard_arrow_down),
+                                      items: items.map((String items) {
+                                        return DropdownMenuItem(
+                                          value: items,
+                                          child: Text(items),
+                                        );
+                                      }).toList(),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownvalue = newValue!;
+                                        });
+                                      },
+                                    ),
+                                  ),
                               ],
                             ),
                           if (mode == AuthMode.phone)
@@ -238,32 +267,6 @@ class _AuthGateState extends State<AuthGate> {
                                 ),
                               )
                               .toList(),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: OutlinedButton(
-                              onPressed: isLoading
-                                  ? null
-                                  : () {
-                                      if (mode != AuthMode.phone) {
-                                        setState(() {
-                                          mode = AuthMode.phone;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          mode = AuthMode.login;
-                                        });
-                                      }
-                                    },
-                              child: isLoading
-                                  ? const CircularProgressIndicator.adaptive()
-                                  : Text(
-                                      mode != AuthMode.phone
-                                          ? 'Sign in with Phone Number'
-                                          : 'Sign in with Email and Password',
-                                    ),
-                            ),
-                          ),
                           const SizedBox(height: 20),
                           if (mode != AuthMode.phone)
                             RichText(
@@ -439,15 +442,40 @@ class _AuthGateState extends State<AuthGate> {
         await auth.signInWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
-        );
+        ).then((value) {
+          FirebaseFirestore.instance.collection('JackSocialApp')
+              .doc("All Users")
+              .collection("Users")
+              .doc(value.user!.uid)
+              .get()
+              .then((value) {
+            var userType = value.data()!["role"];
+            if (userType == "Users") {
+              if (mounted) {
+                Navigator.pushReplacementNamed(context, "/Users");
+              }
+            }
+            else if (userType == "Admins") {
+              if (mounted) {
+                 Navigator.pushReplacementNamed(context, '/Admins');
+              }
+            }
+          });
+        });
       } else if (mode == AuthMode.register) {
         await auth.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
-        );
-      } else {
-        await _phoneAuth();
+        ).then((value) {
+          FirebaseFirestore.instance.collection('JackSocialApp').doc("All Users").collection("Users").doc(value.user!.uid).set(
+              {
+                'role': dropdownvalue,
+              });
+        });
       }
+      // else {
+      //   await _phoneAuth();
+      // }
     }
   }
 
@@ -523,16 +551,6 @@ class _AuthGateState extends State<AuthGate> {
     }
   }
 
-  Future<void> _signInWithTwitter() async {
-    TwitterAuthProvider twitterProvider = TwitterAuthProvider();
-
-    if (kIsWeb) {
-      await auth.signInWithPopup(twitterProvider);
-    } else {
-      await auth.signInWithProvider(twitterProvider);
-    }
-  }
-
   Future<void> _signInWithApple() async {
     final appleProvider = AppleAuthProvider();
     appleProvider.addScope('email');
@@ -542,37 +560,6 @@ class _AuthGateState extends State<AuthGate> {
       await auth.signInWithPopup(appleProvider);
     } else {
       await auth.signInWithProvider(appleProvider);
-    }
-  }
-
-  Future<void> _signInWithYahoo() async {
-    final yahooProvider = YahooAuthProvider();
-
-    if (kIsWeb) {
-      // Once signed in, return the UserCredential
-      await auth.signInWithPopup(yahooProvider);
-    } else {
-      await auth.signInWithProvider(yahooProvider);
-    }
-  }
-
-  Future<void> _signInWithGitHub() async {
-    final githubProvider = GithubAuthProvider();
-
-    if (kIsWeb) {
-      await auth.signInWithPopup(githubProvider);
-    } else {
-      await auth.signInWithProvider(githubProvider);
-    }
-  }
-
-  Future<void> _signInWithMicrosoft() async {
-    final microsoftProvider = MicrosoftAuthProvider();
-
-    if (kIsWeb) {
-      await auth.signInWithPopup(microsoftProvider);
-    } else {
-      await auth.signInWithProvider(microsoftProvider);
     }
   }
 }

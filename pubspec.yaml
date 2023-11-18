@@ -44,7 +44,7 @@ dependencies:
   firebase_database: ^10.2.4
   image_picker: ^1.0.1
   video_player: ^2.7.0
-  cloud_firestore: ^4.8.3
+  cloud_firestore: ^4.12.1
   geolocator: ^9.0.2
   baseflow_plugin_template: ^2.1.2
   chat_gpt_sdk: ^2.2.4
@@ -52,6 +52,8 @@ dependencies:
   url_launcher: ^6.1.12
   animated_background: ^2.0.0
   firebase_storage: ^11.2.6
+  google_fonts: ^6.0.0
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:

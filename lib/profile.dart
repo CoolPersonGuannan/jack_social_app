@@ -198,43 +198,11 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
                           ],
                         ),
                       ),
-                      // const SizedBox(height: 20),
-                      // const SizedBox(height: 20),
-                      // TextButton(
-                      //   onPressed: () async {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => RealTimeFirebase()),
-                      //     );
-                      //   },
-                      //   child: const Text('Test Firebase'),
-                      // ),
-                      // TextButton(
-                      //   onPressed: () async {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => FormWidgetsDemo()),
-                      //     );
-                      //   },
-                      //   child: const Text('Forms Page'),
-                      // ),
-                      // TextButton(
-                      //   onPressed: ()   {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => const ChatPage(character: "You are a teenager in a high school and you are also participate in multiple school clubs and sport teams. You are also focusing on grades and academics. "),),
-                      //     );
-                      //   },
-                      //   child: const Text('Chat Page'),
-                      // ),
-                      // const Divider(),
-                      // TextButton(
-                      //   onPressed: _signOut,
-                      //   child: const Text('Sign out'),
-                      // ),
+                      const Divider(),
+                      TextButton(
+                        onPressed: _signOut,
+                        child: const Text('Sign out'),
+                      ),
                       // GridView.count(
                       //   physics: const BouncingScrollPhysics(),
                       //   shrinkWrap: true,
@@ -356,6 +324,10 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
   /// Example code for sign out.
   Future<void> _signOut() async {
     await auth.signOut();
+    if (mounted) {
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+      const AuthGate()), (Route<dynamic> route) => false);
+    }
     await GoogleSignIn().signOut();
   }
 }
