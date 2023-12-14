@@ -34,34 +34,7 @@ class PostScreen extends StatelessWidget {
               Text(info.content ?? "default",
                 style: TextStyle(fontSize: 26),),
               Text(info.postOwner ?? "love"),
-              const Divider(),
-              // CommentInitiator(user: user,),
-              // ListView.builder(
-              //     physics: const NeverScrollableScrollPhysics(),
-              //     shrinkWrap: true,
-              //     itemCount:100,
-              //     itemBuilder: (context,index){
-              //       return  Text('Some text');
-              //     })
-              //info.comments!.isEmpty ? const Center(child: Text('Empty')):
-              // Expanded(
-              //   //flex: 2,
-              //   child: ListView.builder(
-              //       itemCount: info.comments!.length,
-              //       prototypeItem: Text(info.comments!.first),
-              //       itemBuilder: (context,index) {
-              //         String comment = info.comments![index];
-              //         return Card(
-              //           child: Text(
-              //           comment,
-              //             style: const TextStyle(
-              //           fontSize: 20
-              //             ),
-              //           ),
-              //         );
-              //       }
-              //   ),
-              //  ),
+
             ],
           ),
         ),

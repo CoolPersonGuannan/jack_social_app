@@ -47,6 +47,15 @@ class _DayDetailScreenState extends State<DayDetailScreen> {
                   ),
                 ),
               ),
+              const Divider(),
+              Text(
+                'A bit of Advice: \n ${widget.info["AI_response"]}',
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize:25,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

@@ -35,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
 
     // Initialize ChatGPT SDK
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: "",
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),
