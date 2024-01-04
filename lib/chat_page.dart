@@ -35,18 +35,25 @@ class _ChatPageState extends State<ChatPage> {
 
     // Initialize ChatGPT SDK
     _openAI = OpenAI.instance.build(
-      token: "",
+      token: "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",
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),
     );
-    getInfo().then((value) => // This tells ChatGPT what his role is
+    // getInfo().then((value) => // This tells ChatGPT what his role is
+    // _handleInitialMessage(
+    //   'you are  sport psychology consulting. '
+    //       'Whatever I tell you, provide and skeptical response  $info. '
+    //       'Please send a super short '
+    //       'intro message. Your name is Mind Sport Assistant.',
+    // ));
+
     _handleInitialMessage(
       'you are  sport psychology consulting. '
           'Whatever I tell you, provide and skeptical response  $info. '
           'Please send a super short '
           'intro message. Your name is Mind Sport Assistant.',
-    ));
+    );
 
     super.initState();
   }

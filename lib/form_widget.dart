@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jack_social_app_v2/auth/auth.dart';
 import 'package:jack_social_app_v2/main.dart';
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -40,6 +41,7 @@ class _FormPageState extends State<FormPage> {
   bool? brushedTeeth = false;
   bool enableFeature = false;
   XFile? imageFile;
+  late final OpenAI _openAI;
 
   @override
   void dispose() {
@@ -50,7 +52,14 @@ class _FormPageState extends State<FormPage> {
   @override
   void initState() {
     user = auth.currentUser!;
-    controller = TextEditingController(text: user.displayName);
+
+    _openAI = OpenAI.instance.build(
+      token: "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",
+      baseOption: HttpSetup(
+        receiveTimeout: const Duration(seconds: 30),
+      ),
+    );
+
 
     auth.userChanges().listen((event) {
       if (event != null && mounted) {
@@ -97,6 +106,27 @@ class _FormPageState extends State<FormPage> {
       drugPicUrl = await drugUrl.getDownloadURL(),
     });
     return drugPicUrl.toString();
+  }
+
+  Future<String> _handleSubmit(String text) async {
+    // Handle ChatGPT request and response
+    final request = ChatCompleteText(
+      messages: [
+        Messages(
+          role: Role.assistant,
+          content: "You are a friend of the user, and the user is trying to ask for your advice, be nice to them and be positive for them to feel like hearing from a real friend. ",
+        ),
+        Messages(
+          role: Role.user,
+          content: text,
+        )
+      ],
+      maxToken: 200,
+      model: GptTurbo0631Model(),
+    );
+    final response = await _openAI.onChatCompletion(request: request);
+    print(response);
+    return response!.choices.first.message!.content.trim().replaceAll('"', '');
   }
 
   @override
@@ -328,6 +358,7 @@ class _FormPageState extends State<FormPage> {
                   "mood_of_the_day": description,
                   "happiness_level": maxValue,
                   "picURL": await uploadTodaysPics(key!),
+                  "AI_response": await _handleSubmit(description),
                 };
                 final drugListInput = <String, dynamic> {
                   title: true,

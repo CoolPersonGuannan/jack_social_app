@@ -203,47 +203,11 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
                         onPressed: _signOut,
                         child: const Text('Sign out'),
                       ),
-                      // GridView.count(
-                      //   physics: const BouncingScrollPhysics(),
-                      //   shrinkWrap: true,
-                      //   primary: false,
-                      //   padding: const EdgeInsets.all(20),
-                      //   crossAxisSpacing: 10,
-                      //   mainAxisSpacing: 10,
-                      //   crossAxisCount: 2,
-                      //   children: <Widget>[
-                      //     Container(
-                      //       padding: const EdgeInsets.all(8),
-                      //       color: Colors.teal[100],
-                      //       child: const Text("He'd have you all unravel at the"),
-                      //     ),
-                      //     Container(
-                      //       padding: const EdgeInsets.all(8),
-                      //       color: Colors.teal[200],
-                      //       child: const Text('Heed not the rabble'),
-                      //     ),
-                      //     Container(
-                      //       padding: const EdgeInsets.all(8),
-                      //       color: Colors.teal[300],
-                      //       child: const Text('Sound of screams but the'),
-                      //     ),
-                      //     Container(
-                      //       padding: const EdgeInsets.all(8),
-                      //       color: Colors.teal[400],
-                      //       child: const Text('Who scream'),
-                      //     ),
-                      //     Container(
-                      //       padding: const EdgeInsets.all(8),
-                      //       color: Colors.teal[500],
-                      //       child: const Text('Revolution is coming...'),
-                      //     ),
-                      //     Container(
-                      //       padding: const EdgeInsets.all(8),
-                      //       color: Colors.teal[600],
-                      //       child: const Text('Revolution, they...'),
-                      //     ),
-                      //   ],
-                      // ),
+                      const Divider(),
+                      TextButton(
+                        onPressed: () => _deleteUser(context),
+                        child: const Text('Delete User'),
+                      ),
                     ],
                   ),
                 ),
@@ -329,5 +293,32 @@ class _ProfilePageState extends State<ProfilePage> with TickerProviderStateMixin
       const AuthGate()), (Route<dynamic> route) => false);
     }
     await GoogleSignIn().signOut();
+  }
+
+  /// Example code for delete user.
+  Future<void> _deleteUser(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Do you want to delete Your User from this App?'),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  await auth.currentUser?.delete();
+                  //await  FirebaseFirestore.instance.collection("StudyIsGood").doc("Players").collection("All Users").doc(user.uid).delete();
+                },
+                child: const Text("Yes"),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
+                child: const Text("Maybe Later"),
+              )
+            ],
+          );
+        }
+    );
   }
 }

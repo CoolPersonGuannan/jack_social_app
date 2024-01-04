@@ -109,11 +109,11 @@ class _AuthGateState extends State<AuthGate> {
             ),
       };
     } else {
-      authButtons = {
-        Buttons.Google: () => _handleMultiFactorException(
-              _signInWithGoogle,
-            ),
-      };
+      // authButtons = {
+      //   Buttons.Google: () => _handleMultiFactorException(
+      //         _signInWithGoogle,
+      //       ),
+      // };
     }
   }
 
@@ -242,31 +242,31 @@ class _AuthGateState extends State<AuthGate> {
                             onPressed: _resetPassword,
                             child: const Text('Forgot password?'),
                           ),
-                          ...authButtons.keys
-                              .map(
-                                (button) => Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: AnimatedSwitcher(
-                                    duration: const Duration(milliseconds: 200),
-                                    child: isLoading
-                                        ? Container(
-                                            color: Colors.grey[200],
-                                            height: 50,
-                                            width: double.infinity,
-                                          )
-                                        : SizedBox(
-                                            width: double.infinity,
-                                            height: 50,
-                                            child: SignInButton(
-                                              button,
-                                              onPressed: authButtons[button]!,
-                                            ),
-                                          ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                          // ...authButtons.keys
+                          //     .map(
+                          //       (button) => Padding(
+                          //         padding:
+                          //             const EdgeInsets.symmetric(vertical: 5),
+                          //         child: AnimatedSwitcher(
+                          //           duration: const Duration(milliseconds: 200),
+                          //           child: isLoading
+                          //               ? Container(
+                          //                   color: Colors.grey[200],
+                          //                   height: 50,
+                          //                   width: double.infinity,
+                          //                 )
+                          //               : SizedBox(
+                          //                   width: double.infinity,
+                          //                   height: 50,
+                          //                   child: SignInButton(
+                          //                     button,
+                          //                     onPressed: authButtons[button]!,
+                          //                   ),
+                          //                 ),
+                          //         ),
+                          //       ),
+                          //     )
+                          //     .toList(),
                           const SizedBox(height: 20),
                           if (mode != AuthMode.phone)
                             RichText(
@@ -296,20 +296,20 @@ class _AuthGateState extends State<AuthGate> {
                               ),
                             ),
                           const SizedBox(height: 10),
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyLarge,
-                              children: [
-                                const TextSpan(text: 'Or '),
-                                TextSpan(
-                                  text: 'continue as guest',
-                                  style: const TextStyle(color: Colors.blue),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = _anonymousAuth,
-                                ),
-                              ],
-                            ),
-                          ),
+                          // RichText(
+                          //   text: TextSpan(
+                          //     style: Theme.of(context).textTheme.bodyLarge,
+                          //     children: [
+                          //       const TextSpan(text: 'Or '),
+                          //       TextSpan(
+                          //         text: 'continue as guest',
+                          //         style: const TextStyle(color: Colors.blue),
+                          //         recognizer: TapGestureRecognizer()
+                          //           ..onTap = _anonymousAuth,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
