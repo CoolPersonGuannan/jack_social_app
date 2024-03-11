@@ -4,11 +4,8 @@ import 'package:animated_background/animated_background.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:jack_social_app_v2/chat_page.dart';
 import 'package:jack_social_app_v2/form_widget.dart';
-import 'package:jack_social_app_v2/image_picker_example.dart';
 import 'package:jack_social_app_v2/main.dart';
-import 'package:jack_social_app_v2/your_journals.dart';
 
 import 'auth/auth.dart';
 

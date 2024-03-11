@@ -35,7 +35,7 @@ class _ChatPageState extends State<ChatPage> {
 
     // Initialize ChatGPT SDK
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: "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",
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),
@@ -296,7 +296,7 @@ class _ChatPageState extends State<ChatPage> {
         title: const Text(
           'Your AI friend',
           style: TextStyle(
-            color: Colors.white,
+            //color: Colors.white,
           ),
         ),
         //backgroundColor: Colors.black87,

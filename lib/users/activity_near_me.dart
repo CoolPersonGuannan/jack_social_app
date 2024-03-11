@@ -77,136 +77,136 @@ class _ActivityNearMePageState extends State<ActivityNearMePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text("Explore Page"),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add_alert),
-            tooltip: 'Show Snackbar',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            tooltip: 'Go to the next page',
-            onPressed: () {
-              // Navigator.push(context, MaterialPageRoute<void>(
-              //   builder: (BuildContext context) {
-              //     return Scaffold(
-              //       appBar: AppBar(
-              //         title: const Text('Next page'),
-              //       ),
-              //       body: Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: SearchAnchor(
-              //             builder: (BuildContext context, SearchController controller) {
-              //               return SearchBar(
-              //                 controller: controller,
-              //                 padding: const MaterialStatePropertyAll<EdgeInsets>(
-              //                     EdgeInsets.symmetric(horizontal: 16.0)),
-              //                 onTap: () {
-              //                   controller.openView();
-              //                 },
-              //                 onChanged: (_) {
-              //                   controller.openView();
-              //                 },
-              //                 leading: const Icon(Icons.search),
-              //               );
-              //             },
-              //             suggestionsBuilder: (BuildContext context, SearchController controller) {
-              //               return <Widget> {
-              //                 Padding(
-              //                   padding: const EdgeInsets.all(8),
-              //                   child: Row(
-              //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //                     children: [
-              //                       GestureDetector(
-              //                         child: const Text("#Algebra"),
-              //                         onTap: () {
-              //                           Navigator.push(
-              //                             context,
-              //                             MaterialPageRoute(builder: (context) =>  const AlgebraPage()),
-              //                           );
-              //                         },
-              //                       ),
-              //                       GestureDetector(
-              //                         child: const Text("#Number Theory"),
-              //                         onTap: () {
-              //                           Navigator.push(
-              //                             context,
-              //                             MaterialPageRoute(builder: (context) => const NumberTheoryPage()),
-              //                           );
-              //                         },
-              //                       ),
-              //                       const Text("#Geometry"),
-              //                     ],
-              //                   ),
-              //                 ),
-              //                 const Padding(
-              //                   padding: EdgeInsets.all(8),
-              //                   child: Row(
-              //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //                     children: [
-              //                       Text("#Combinatorics"),
-              //                       Text("#Others"),
-              //                       // Text("data 6"),
-              //                     ],
-              //                   ),
-              //                 ),
-              //                 SizedBox(
-              //                   height: 240,
-              //                   child: ListView.builder(
-              //                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-              //                     physics: const PageScrollPhysics(),
-              //                     itemBuilder: (BuildContext context, int index) {
-              //                       if(index % 2 == 0) {
-              //                         return _buildCarousel(context, index ~/ 2);
-              //                       }
-              //                       else {
-              //                         return const Divider();
-              //                       }
-              //                     },
-              //                   ) ,
-              //                 ),
-              //                 SizedBox(
-              //                   height: 240,
-              //                   child: ListView.builder(
-              //                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-              //                     physics: const PageScrollPhysics(),
-              //                     itemBuilder: (BuildContext context, int index) {
-              //                       if(index % 2 == 0) {
-              //                         return _buildCarousel(context, index ~/ 2);
-              //                       }
-              //                       else {
-              //                         return const Divider();
-              //                       }
-              //                     },
-              //                   ) ,
-              //                 ),
-              //                 SizedBox(
-              //                   height: 240,
-              //                   child: ListView.builder(
-              //                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-              //                     physics: const PageScrollPhysics(),
-              //                     itemBuilder: (BuildContext context, int index) {
-              //                       if(index % 2 == 0) {
-              //                         return _buildCarousel(context, index ~/ 2);
-              //                       }
-              //                       else {
-              //                         return const Divider();
-              //                       }
-              //                     },
-              //                   ) ,
-              //                 ),
-              //               };
-              //             }),
-              //       ),
-              //     );
-              //   },
-              // ));
-            },
-          ),
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: const Icon(Icons.add_alert),
+        //     tooltip: 'Show Snackbar',
+        //     onPressed: () {
+        //       ScaffoldMessenger.of(context).showSnackBar(
+        //           const SnackBar(content: Text('This is a snackbar')));
+        //     },
+        //   ),
+        //   IconButton(
+        //     icon: const Icon(Icons.search),
+        //     tooltip: 'Go to the next page',
+        //     onPressed: () {
+        //       // Navigator.push(context, MaterialPageRoute<void>(
+        //       //   builder: (BuildContext context) {
+        //       //     return Scaffold(
+        //       //       appBar: AppBar(
+        //       //         title: const Text('Next page'),
+        //       //       ),
+        //       //       body: Padding(
+        //       //         padding: const EdgeInsets.all(8.0),
+        //       //         child: SearchAnchor(
+        //       //             builder: (BuildContext context, SearchController controller) {
+        //       //               return SearchBar(
+        //       //                 controller: controller,
+        //       //                 padding: const MaterialStatePropertyAll<EdgeInsets>(
+        //       //                     EdgeInsets.symmetric(horizontal: 16.0)),
+        //       //                 onTap: () {
+        //       //                   controller.openView();
+        //       //                 },
+        //       //                 onChanged: (_) {
+        //       //                   controller.openView();
+        //       //                 },
+        //       //                 leading: const Icon(Icons.search),
+        //       //               );
+        //       //             },
+        //       //             suggestionsBuilder: (BuildContext context, SearchController controller) {
+        //       //               return <Widget> {
+        //       //                 Padding(
+        //       //                   padding: const EdgeInsets.all(8),
+        //       //                   child: Row(
+        //       //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       //                     children: [
+        //       //                       GestureDetector(
+        //       //                         child: const Text("#Algebra"),
+        //       //                         onTap: () {
+        //       //                           Navigator.push(
+        //       //                             context,
+        //       //                             MaterialPageRoute(builder: (context) =>  const AlgebraPage()),
+        //       //                           );
+        //       //                         },
+        //       //                       ),
+        //       //                       GestureDetector(
+        //       //                         child: const Text("#Number Theory"),
+        //       //                         onTap: () {
+        //       //                           Navigator.push(
+        //       //                             context,
+        //       //                             MaterialPageRoute(builder: (context) => const NumberTheoryPage()),
+        //       //                           );
+        //       //                         },
+        //       //                       ),
+        //       //                       const Text("#Geometry"),
+        //       //                     ],
+        //       //                   ),
+        //       //                 ),
+        //       //                 const Padding(
+        //       //                   padding: EdgeInsets.all(8),
+        //       //                   child: Row(
+        //       //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //       //                     children: [
+        //       //                       Text("#Combinatorics"),
+        //       //                       Text("#Others"),
+        //       //                       // Text("data 6"),
+        //       //                     ],
+        //       //                   ),
+        //       //                 ),
+        //       //                 SizedBox(
+        //       //                   height: 240,
+        //       //                   child: ListView.builder(
+        //       //                     padding: const EdgeInsets.symmetric(vertical: 16.0),
+        //       //                     physics: const PageScrollPhysics(),
+        //       //                     itemBuilder: (BuildContext context, int index) {
+        //       //                       if(index % 2 == 0) {
+        //       //                         return _buildCarousel(context, index ~/ 2);
+        //       //                       }
+        //       //                       else {
+        //       //                         return const Divider();
+        //       //                       }
+        //       //                     },
+        //       //                   ) ,
+        //       //                 ),
+        //       //                 SizedBox(
+        //       //                   height: 240,
+        //       //                   child: ListView.builder(
+        //       //                     padding: const EdgeInsets.symmetric(vertical: 16.0),
+        //       //                     physics: const PageScrollPhysics(),
+        //       //                     itemBuilder: (BuildContext context, int index) {
+        //       //                       if(index % 2 == 0) {
+        //       //                         return _buildCarousel(context, index ~/ 2);
+        //       //                       }
+        //       //                       else {
+        //       //                         return const Divider();
+        //       //                       }
+        //       //                     },
+        //       //                   ) ,
+        //       //                 ),
+        //       //                 SizedBox(
+        //       //                   height: 240,
+        //       //                   child: ListView.builder(
+        //       //                     padding: const EdgeInsets.symmetric(vertical: 16.0),
+        //       //                     physics: const PageScrollPhysics(),
+        //       //                     itemBuilder: (BuildContext context, int index) {
+        //       //                       if(index % 2 == 0) {
+        //       //                         return _buildCarousel(context, index ~/ 2);
+        //       //                       }
+        //       //                       else {
+        //       //                         return const Divider();
+        //       //                       }
+        //       //                     },
+        //       //                   ) ,
+        //       //                 ),
+        //       //               };
+        //       //             }),
+        //       //       ),
+        //       //     );
+        //       //   },
+        //       // ));
+        //     },
+        //   ),
+        // ],
       ),
       body: StreamBuilder(
           stream: postRef.orderBy("date",descending: true).snapshots(),

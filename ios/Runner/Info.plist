@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Aid+</string>
+	<string>Ai+d</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -19,6 +19,8 @@
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>This app needs access to location when open in order to personalize your volunteer-finding experience.</string>
     <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location when in the background in order to personalize your volunteer-finding experience.</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>This app needs access to location when in the background in order to personalize your volunteer-finding experience.</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>

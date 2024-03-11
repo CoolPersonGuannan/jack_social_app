@@ -50,7 +50,7 @@ class _BottomNavigationBarControlState extends State<BottomNavigationBarControl>
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.yellow,
+        backgroundColor: Theme.of(context).primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.add_business_outlined),

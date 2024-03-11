@@ -54,7 +54,7 @@ class _FormPageState extends State<FormPage> {
     user = auth.currentUser!;
 
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: "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",
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),
