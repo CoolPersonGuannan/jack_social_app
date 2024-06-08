@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jack_social_app_v2/api_key.dart';
 import 'package:jack_social_app_v2/auth/auth.dart';
 import 'package:jack_social_app_v2/main.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
@@ -54,7 +55,7 @@ class _FormPageState extends State<FormPage> {
     user = auth.currentUser!;
 
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: ApiKey.openAIApiKey,
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),

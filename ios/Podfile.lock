@@ -953,7 +953,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 9387bf15abfc69a714f54e54f74a251264fdb79b
   FirebaseMessaging: 80b4a086d20ed4fd385a702f4bfa920e14f5064d
   FirebaseStorage: d664834746c0274d267072c6bfa100960f90654a
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
@@ -974,6 +974,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
 
-PODFILE CHECKSUM: ce21932c80c30761f07dbe31f5e62a63bdba67bf
+PODFILE CHECKSUM: c8d69d357dc411f664dd530090659c2e790b388b
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

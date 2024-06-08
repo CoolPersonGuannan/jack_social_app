@@ -2,6 +2,7 @@ import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:jack_social_app_v2/api_key.dart';
 
 // import 'firebase/db.dart';
 import 'model.dart';
@@ -35,7 +36,7 @@ class _ChatPageState extends State<ChatPage> {
 
     // Initialize ChatGPT SDK
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: ApiKey.openAIApiKey,
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),

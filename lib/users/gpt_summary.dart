@@ -2,6 +2,7 @@ import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter/rendering.dart';
+import 'package:jack_social_app_v2/api_key.dart';
 
 class GPTSummaryScreen extends StatefulWidget {
   const GPTSummaryScreen({
@@ -24,7 +25,7 @@ class _GPTSummaryScreenState extends State<GPTSummaryScreen> {
 
   Future _handleSubmit() async {
     _openAI = OpenAI.instance.build(
-      token: "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",
+      token: ApiKey.openAIApiKey,
       baseOption: HttpSetup(
         receiveTimeout: const Duration(seconds: 30),
       ),
